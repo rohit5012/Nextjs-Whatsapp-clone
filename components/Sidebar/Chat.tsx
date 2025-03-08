@@ -1,4 +1,5 @@
 import { AllUsers, AllUsersType } from "@/types";
+import Image from "next/image";
 import React from "react";
 
 type Props = {
@@ -7,9 +8,24 @@ type Props = {
 
 const Chat: React.FC<Props> = ({ data }) => {
   return (
-    <p className="flex items-center justify-between py-4 px-6 border-b bg-white border-gray-400">
-      {data.email}
-    </p>
+    <div className="flex items-center justify-between py-4 px-6 border-b bg-white border-gray-400 hover:bg-gray-200 opacity-80 overflow-hidden cursor-pointer">
+      <div className="flex justify-start items-center gap-4">
+        <Image
+          src={data?.image}
+          alt="user"
+          width={50}
+          height={50}
+          className="rounded-full"
+        />
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col items-start justify-start">
+            <p className="text-gray-500">{data?.firstName}</p>
+            <p className="text-gray-500 truncate w-1/2">This is message body</p>
+          </div>
+          <p className="text-gray-500 text-sm">10:39</p>
+        </div>
+      </div>
+    </div>
   );
 };
 
