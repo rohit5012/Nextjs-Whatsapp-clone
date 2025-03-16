@@ -1,5 +1,6 @@
 "use client";
 
+import AppModal from "@/components/AppModal";
 import UserAvatar from "@/components/common/UserAvatar";
 import { auth } from "@/lib/firebase";
 import {
@@ -32,7 +33,11 @@ const SidebarHeader: React.FC = () => {
         <DataUsageOutlined />
       </IconButton>
       <IconButton>
-        <ChatOutlined />
+        <AppModal
+          icon={<ChatOutlined />}
+          title="All Contacts"
+          modalType="chat"
+        />
       </IconButton>
     </div>
   );
