@@ -1,7 +1,7 @@
 import { ContactsType } from "@/types";
-import ChatModal from "./ChatModal";
 import UploadModal from "./UploadModal";
 import { IconModalType } from "./index.interface";
+import ContactList from "./ContactList";
 
 export const boxStyle = {
   position: "absolute",
@@ -24,7 +24,7 @@ export const handleModalChildren = (
     case "upload":
       return <UploadModal handleClose={handleClose} />;
     case "chat":
-      return <ChatModal contacts={contacts} handleClose={handleClose} />;
+      return <ContactList contacts={contacts} handleClose={handleClose} />;
     default:
       return;
   }

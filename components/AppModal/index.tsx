@@ -1,8 +1,11 @@
 import { Box, Modal } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { boxStyle, handleModalChildren } from "./helper";
 import { JSX } from "@emotion/react/jsx-runtime";
 import { IconModalType } from "./index.interface";
+import { ContactsType } from "@/types";
+import { DocumentData, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import { getSnapshotDoc, usersCollection } from "@/lib/firebase/userController";
 
 type Props = {
   icon: JSX.Element;
@@ -14,13 +17,14 @@ const AppModal: React.FC<Props> = ({ icon, title, modalType }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const contacts = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "",
-    },
-  ];
+
+  const [contacts, setContacts] = React.useState<ContactsType[]>([]);
+
+  useEffect(() =>
+    onSnapshot(usersCollection, (snapshot: QuerySnapshot<DocumentData>) => {
+      setContacts(snapshot.docs.map((doc) => getSnapshotDoc(doc)));
+    })
+  );
   return (
     <div>
       <div onClick={handleOpen}>{icon}</div>
